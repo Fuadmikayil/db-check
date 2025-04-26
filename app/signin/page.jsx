@@ -1,8 +1,12 @@
+//signin
+
 'use client'
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 export default function SignInForm() {
+  const router = useRouter();
   const {
     register,
     reset,
@@ -11,14 +15,14 @@ export default function SignInForm() {
   } = useForm();
 
   const onSubmit = async(data) => {
+    console.log(data);
     const res = await fetch('/api/signin',{
       method:"POST",
       body: JSON.stringify(data)
     })
     const resData = await res.json()
     if(res.status==200){
-      alert('WELCOME')
-      reset()
+      router.push('/userPanel');
     }else{
       alert(resData.mes)
     }

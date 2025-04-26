@@ -1,3 +1,5 @@
+// signup
+
 'use client'
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -11,7 +13,6 @@ export default function SignUpForm() {
   } = useForm();
 
   const onSubmit = async(data) => {
-    console.log(data);
     const res = await fetch('/api/signup',{
       method:"POST",
       body: JSON.stringify({...data, age: Number(data.age)})
