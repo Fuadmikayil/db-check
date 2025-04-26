@@ -1,7 +1,6 @@
 'use client'
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { number } from 'zod';
 
 export default function SignUpForm() {
   const {
@@ -13,19 +12,23 @@ export default function SignUpForm() {
 
   const onSubmit = async(data) => {
     console.log(data);
-    // TODO: handle sign-up logic (e.g., API call)
     const res = await fetch('/api/signup',{
-      method:'POST',
-      body:JSON.stringify({...data, age:Number(data.age)})
+      method:"POST",
+      body: JSON.stringify({...data, age: Number(data.age)})
     })
+    const resData = await res.json()
+
+
+    
+
     if(res.status==201){
-      alert('User aded Succesfully!')
+      alert('User Added Succesfully')
       reset()
     }else{
-      alert('Something went wrong!')
+      alert(resData.mes)
     }
+    
   };
-
 
   return (
     <form
